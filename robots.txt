@@ -1,0 +1,7 @@
+# Staging / pre-launch: this site must NOT be indexed.
+# Crawling is deliberately left open so search engines can see the
+# X-Robots-Tag header and <meta name="robots"> noindex directives.
+# (Blocking with "Disallow: /" would hide those directives and can still
+# let bare URLs appear in Google if linked from elsewhere.)
+User-agent: *
+Allow: /
