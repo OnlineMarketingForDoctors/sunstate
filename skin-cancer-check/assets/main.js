@@ -102,6 +102,22 @@
     });
   }
 
+
+  /* ---------- Inline hero video (mobile) ---------- */
+  var inline = document.querySelector('[data-inline-video]');
+  if (inline) {
+    inline.querySelector('button').addEventListener('click', function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + inline.dataset.videoId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.title = 'Total Body Mapping at Sunstate Family Practice';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      inline.innerHTML = '';
+      inline.appendChild(f);
+      if (video && !video.paused) video.pause();
+    });
+  }
+
   /* ---------- Image reveals ---------- */
   /* observe the unclipped parent: a fully clipped target may never report as intersecting */
   var reveals = document.querySelectorAll('.reveal-img');
