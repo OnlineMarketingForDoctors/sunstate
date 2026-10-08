@@ -44,7 +44,6 @@
   /* ---------- Hero video ---------- */
   var video = document.querySelector('[data-hero-video]');
   var hero = document.querySelector('.hero');
-  var toggle = document.querySelector('[data-video-toggle]');
   if (video) {
     var mobileMq = window.matchMedia('(max-width: 900px)');
     /* mobile shows a gradient instead of the background video, so only load it on larger screens */
@@ -55,20 +54,8 @@
     };
     loadBg();
     if (mobileMq.addEventListener) mobileMq.addEventListener('change', loadBg);
-    if (reduceMotion) {
-      video.removeAttribute('autoplay');
-      toggle.setAttribute('aria-pressed', 'true');
-      toggle.setAttribute('aria-label', 'Play background video');
-    } else {
-      var p = video.play();
-      if (p && p.catch) p.catch(function () {});
-    }
-    toggle.addEventListener('click', function () {
-      var paused = toggle.getAttribute('aria-pressed') === 'true';
-      if (paused) { video.play(); } else { video.pause(); }
-      toggle.setAttribute('aria-pressed', String(!paused));
-      toggle.setAttribute('aria-label', paused ? 'Pause background video' : 'Play background video');
-    });
+    /* respect reduced motion: no autoplay for people who ask for less movement */
+    if (reduceMotion) video.removeAttribute('autoplay');
   }
   requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('is-in'); }); });
 
