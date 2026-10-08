@@ -98,37 +98,24 @@
 
 
   /* ---------- Inline hero video (mobile) ----------
-     Autoplays muted with YouTube's controls hidden. Tapping "Tap for sound"
-     restarts it with sound and the normal controls. */
+     A self-hosted clip plays muted with no player chrome (YouTube's iOS player
+     always shows its own buttons). "Watch with sound" swaps in the YouTube video. */
   var inline = document.querySelector('[data-inline-video]');
   if (inline) {
-    var vid = inline.dataset.videoId;
-    var embed = function (params) {
+    var clip = inline.querySelector('video');
+    if (window.matchMedia('(max-width: 900px)').matches) {
+      clip.src = clip.dataset.src;
+      if (!reduceMotion) { var cp = clip.play(); if (cp && cp.catch) cp.catch(function () {}); }
+    }
+    inline.querySelector('.hero__inline-sound').addEventListener('click', function () {
       var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/' + vid + '?autoplay=1&playsinline=1&rel=0&modestbranding=1&iv_load_policy=3' + params;
+      f.src = 'https://www.youtube-nocookie.com/embed/' + inline.dataset.videoId + '?autoplay=1&playsinline=1&rel=0&modestbranding=1';
       f.title = 'Total Body Mapping at Sunstate Family Practice';
       f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       f.allowFullscreen = true;
       inline.innerHTML = '';
       inline.appendChild(f);
-      return f;
-    };
-    var playWithSound = function () {
-      inline.classList.remove('is-ambient');
-      embed('');
-    };
-    var playAmbient = function () {
-      inline.classList.add('is-ambient');
-      embed('&mute=1&controls=0&disablekb=1&fs=0&loop=1&playlist=' + vid);
-      var sound = document.createElement('button');
-      sound.type = 'button';
-      sound.className = 'hero__inline-sound';
-      sound.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></svg>Tap for sound';
-      sound.addEventListener('click', playWithSound);
-      inline.appendChild(sound);
-    };
-    inline.querySelector('button').addEventListener('click', playWithSound);
-    if (window.matchMedia('(max-width: 900px)').matches && !reduceMotion) playAmbient();
+    });
   }
 
   /* ---------- Image reveals ---------- */

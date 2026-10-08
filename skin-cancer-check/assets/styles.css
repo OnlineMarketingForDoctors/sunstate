@@ -681,12 +681,7 @@ body.has-lightbox { overflow: hidden; }
     display: block; position: relative; aspect-ratio: 16 / 9; margin: 0 0 24px;
     border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: var(--sh-3);
   }
-  .hero__inline img, .hero__inline iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
-  .hero__inline-play {
-    position: absolute; left: 50%; top: 50%; width: 68px; height: 68px; margin: -34px 0 0 -34px; border-radius: 50%; border: 0;
-    background: var(--green); color: #fff; display: grid; place-items: center; box-shadow: 0 0 0 10px rgba(29,164,100,.3);
-  }
-  .hero__inline-play svg { width: 28px; height: 28px; fill: currentColor; margin-left: 4px; }
+  .hero__inline video, .hero__inline iframe { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border: 0; }
 }
 
 
@@ -715,8 +710,6 @@ body.has-lightbox { overflow: hidden; }
 }
 
 
-/* ambient (muted, no controls) inline video: crop YouTube's title bar and block taps on the player */
-.hero__inline.is-ambient iframe { pointer-events: none; transform: scale(1.22); }
 .hero__inline-sound {
   position: absolute; left: 12px; bottom: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
   border: 0; border-radius: 999px; padding: 9px 14px 9px 12px; background: rgba(36, 24, 33, .78); color: #fff;
