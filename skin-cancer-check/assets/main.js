@@ -97,19 +97,24 @@
   }
 
 
-  /* ---------- Inline hero video (mobile) ---------- */
+  /* ---------- Inline hero video (mobile): autoplays muted, visitor can unmute ---------- */
   var inline = document.querySelector('[data-inline-video]');
   if (inline) {
-    inline.querySelector('button').addEventListener('click', function () {
+    var startInline = function (withSound) {
+      if (inline.querySelector('iframe')) return;
+      var id = inline.dataset.videoId;
       var f = document.createElement('iframe');
-      f.src = 'https://www.youtube-nocookie.com/embed/' + inline.dataset.videoId + '?autoplay=1&rel=0&modestbranding=1&playsinline=1';
+      f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&playsinline=1&rel=0&modestbranding=1' +
+        (withSound ? '' : '&mute=1&loop=1&playlist=' + id);
       f.title = 'Total Body Mapping at Sunstate Family Practice';
       f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
       f.allowFullscreen = true;
       inline.innerHTML = '';
       inline.appendChild(f);
-      if (video && !video.paused) video.pause();
-    });
+    };
+    inline.querySelector('button').addEventListener('click', function () { startInline(true); });
+    var inlineMq = window.matchMedia('(max-width: 900px)');
+    if (inlineMq.matches && !reduceMotion) startInline(false);
   }
 
   /* ---------- Image reveals ---------- */
