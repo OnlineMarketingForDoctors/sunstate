@@ -203,10 +203,6 @@ button { font: inherit; cursor: pointer; }
 .hero__pause svg { width: 18px; height: 18px; fill: currentColor; }
 .hero__pause .i-play, .hero__pause[aria-pressed="true"] .i-pause { display: none; }
 .hero__pause[aria-pressed="true"] .i-play { display: block; }
-.hero__agpal {
-  position: absolute; right: calc(var(--gutter) + 60px); bottom: 22px; width: 76px; height: 76px;
-  border-radius: 50%; background: #fff; padding: 6px; box-shadow: var(--sh-1);
-}
 
 /* load sequence */
 .js .hero__copy > * { opacity: 0; transform: translateY(18px); }
@@ -231,8 +227,7 @@ button { font: inherit; cursor: pointer; }
   .hero__title { margin-bottom: 16px; }
   .hero__sub { margin-bottom: 18px; }
   .hero__points { margin-bottom: 26px; }
-  .hero__agpal { top: 18px; bottom: auto; right: var(--gutter); width: 60px; height: 60px; }
-  .hero__pause { top: 88px; bottom: auto; width: 40px; height: 40px; }
+  .hero__pause { top: 18px; bottom: auto; width: 40px; height: 40px; }
   .hero__points { gap: 8px; font-size: 1rem; }
 }
 
