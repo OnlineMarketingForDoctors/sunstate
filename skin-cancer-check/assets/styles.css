@@ -602,7 +602,14 @@ button { font: inherit; cursor: pointer; }
 .hours th { text-align: left; font-weight: 500; padding: 3px 16px 3px 0; color: var(--stone); }
 .hours td { padding: 3px 0; font-weight: 700; white-space: nowrap; }
 .textlink { font-weight: 700; }
-@media (max-width: 560px) { .final__info { grid-template-columns: 1fr; } .final { padding: 40vh 0 0; } .final__inner { padding: 0; } .final__card { border-radius: var(--r-xl) var(--r-xl) 0 0; } }
+@media (max-width: 560px) {
+  .final__info { grid-template-columns: 1fr; }
+  .final { padding: 0; background: #fff; }
+  .final__bg { position: relative; inset: auto; z-index: 0; aspect-ratio: 4 / 3; overflow: hidden; }
+  .final__bg img { height: 100%; object-position: 72% 55%; transform: none !important; }
+  .final__inner { padding: 0; position: relative; z-index: 1; margin-top: -40px; }
+  .final__card { border-radius: var(--r-xl) var(--r-xl) 0 0; box-shadow: none; }
+}
 
 /* ---------- Footer ---------- */
 .footer { background: var(--plum-deep); color: rgba(255,255,255,.82); padding: 72px 0 32px; font-size: .9375rem; }
