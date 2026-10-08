@@ -46,8 +46,15 @@
   var hero = document.querySelector('.hero');
   var toggle = document.querySelector('[data-video-toggle]');
   if (video) {
-    var mobile = window.matchMedia('(max-width: 900px)').matches;
-    video.src = mobile ? video.dataset.srcMobile : video.dataset.srcDesktop;
+    var mobileMq = window.matchMedia('(max-width: 900px)');
+    /* mobile shows a gradient instead of the background video, so only load it on larger screens */
+    var loadBg = function () {
+      if (mobileMq.matches || video.getAttribute('src')) return;
+      video.src = video.dataset.srcDesktop;
+      if (!reduceMotion) { var pp = video.play(); if (pp && pp.catch) pp.catch(function () {}); }
+    };
+    loadBg();
+    if (mobileMq.addEventListener) mobileMq.addEventListener('change', loadBg);
     if (reduceMotion) {
       video.removeAttribute('autoplay');
       toggle.setAttribute('aria-pressed', 'true');

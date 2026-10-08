@@ -714,6 +714,14 @@ body.has-lightbox { overflow: hidden; }
   .fee-table tbody tr:last-child > * { border-bottom: 0; }
 }
 
+
+/* mobile hero: purple gradient instead of background video */
+@media (max-width: 900px) {
+  .hero { background: radial-gradient(120% 70% at 100% 0%, #9a4a91 0%, rgba(154,74,145,0) 60%), linear-gradient(165deg, var(--plum) 0%, var(--plum-deep) 55%, #210c1f 100%); min-height: 0; }
+  .hero__video, .hero__shade, .hero__pause { display: none; }
+  .hero__inner { padding-top: 40px; padding-bottom: 44px; }
+}
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
