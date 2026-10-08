@@ -714,6 +714,16 @@ body.has-lightbox { overflow: hidden; }
   .hero__inner { padding-top: 40px; padding-bottom: 44px; }
 }
 
+
+/* ambient (muted, no controls) inline video: crop YouTube's title bar and block taps on the player */
+.hero__inline.is-ambient iframe { pointer-events: none; transform: scale(1.22); }
+.hero__inline-sound {
+  position: absolute; left: 12px; bottom: 12px; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
+  border: 0; border-radius: 999px; padding: 9px 14px 9px 12px; background: rgba(36, 24, 33, .78); color: #fff;
+  font-family: var(--f-display); font-weight: 800; font-size: .875rem; backdrop-filter: blur(6px);
+}
+.hero__inline-sound svg { width: 18px; height: 18px; fill: currentColor; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
