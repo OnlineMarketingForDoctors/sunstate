@@ -65,6 +65,43 @@
   }
   requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('is-in'); }); });
 
+
+  /* ---------- Hero video lightbox ---------- */
+  var lb = document.querySelector('[data-lightbox]');
+  var lbOpen = document.querySelector('[data-lightbox-open]');
+  if (lb && lbOpen) {
+    var lbFrame = lb.querySelector('[data-lightbox-frame]');
+    var lbClose = lb.querySelector('.lightbox__close');
+    var bgWasPlaying = false;
+    var openLb = function () {
+      var f = document.createElement('iframe');
+      f.src = 'https://www.youtube-nocookie.com/embed/' + lbOpen.dataset.videoId + '?autoplay=1&rel=0&modestbranding=1';
+      f.title = 'Total Body Mapping at Sunstate Family Practice';
+      f.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+      f.allowFullscreen = true;
+      lbFrame.appendChild(f);
+      lb.hidden = false;
+      document.body.classList.add('has-lightbox');
+      if (video && !video.paused) { bgWasPlaying = true; video.pause(); }
+      lbClose.focus();
+    };
+    var closeLb = function () {
+      if (lb.hidden) return;
+      lb.hidden = true;
+      lbFrame.innerHTML = '';
+      document.body.classList.remove('has-lightbox');
+      if (video && bgWasPlaying) { video.play(); bgWasPlaying = false; }
+      lbOpen.focus();
+    };
+    lbOpen.addEventListener('click', openLb);
+    lb.querySelectorAll('[data-lightbox-close]').forEach(function (el) { el.addEventListener('click', closeLb); });
+    document.addEventListener('keydown', function (e) {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') closeLb();
+      if (e.key === 'Tab') { e.preventDefault(); lbClose.focus(); }
+    });
+  }
+
   /* ---------- Image reveals ---------- */
   /* observe the unclipped parent: a fully clipped target may never report as intersecting */
   var reveals = document.querySelectorAll('.reveal-img');

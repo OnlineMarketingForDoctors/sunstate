@@ -636,6 +636,42 @@ button { font: inherit; cursor: pointer; }
 .to-top:hover { background: var(--green-hover); }
 .to-top svg { width: 24px; height: 24px; fill: currentColor; }
 
+
+/* ---------- Hero play button + lightbox ---------- */
+.hero__play {
+  position: absolute; left: 75%; top: 50%; transform: translate(-50%, -50%);
+  display: flex; flex-direction: column; align-items: center; gap: 16px;
+  background: none; border: 0; color: #fff; padding: 0;
+}
+.hero__play-ring {
+  width: 112px; height: 112px; border-radius: 50%; display: grid; place-items: center;
+  background: var(--green); box-shadow: 0 0 0 14px rgba(29, 164, 100, .28), 0 20px 50px -10px rgba(0,0,0,.5);
+  transition: transform .3s cubic-bezier(.3,1.4,.5,1), box-shadow .3s;
+  animation: playPulse 2.6s ease-out infinite;
+}
+.hero__play-ring svg { width: 40px; height: 40px; fill: #fff; margin-left: 6px; }
+.hero__play:hover .hero__play-ring { transform: scale(1.08); }
+.hero__play-label { font-family: var(--f-display); font-weight: 800; font-size: 1.0625rem; text-shadow: 0 2px 12px rgba(0,0,0,.5); max-width: 18ch; text-align: center; line-height: 1.25; }
+@keyframes playPulse { 0% { box-shadow: 0 0 0 0 rgba(29,164,100,.55), 0 20px 50px -10px rgba(0,0,0,.5); } 70%, 100% { box-shadow: 0 0 0 28px rgba(29,164,100,0), 0 20px 50px -10px rgba(0,0,0,.5); } }
+@media (max-width: 900px) {
+  .hero__play { left: var(--gutter); top: 24px; transform: none; flex-direction: row; gap: 12px; }
+  .hero__play-ring { flex: none; width: 64px; height: 64px; box-shadow: 0 0 0 8px rgba(29,164,100,.28); }
+  .hero__play-ring svg { width: 26px; height: 26px; margin-left: 4px; }
+  .hero__play-label { text-align: left; font-size: .9375rem; max-width: 24ch; }
+}
+
+.lightbox { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; padding: 24px; }
+.lightbox[hidden] { display: none; }
+.lightbox__backdrop { position: absolute; inset: 0; background: rgba(20, 8, 19, .88); backdrop-filter: blur(6px); animation: fadeIn .25s ease; }
+.lightbox__dialog { position: relative; width: min(1200px, 100%); animation: lbIn .35s cubic-bezier(.2,.8,.2,1); }
+.lightbox__frame { aspect-ratio: 16 / 9; border-radius: var(--r-lg); overflow: hidden; background: #000; box-shadow: var(--sh-3); }
+.lightbox__frame iframe { width: 100%; height: 100%; border: 0; display: block; }
+.lightbox__close { position: absolute; right: 0; top: -56px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: #fff; color: var(--plum); display: grid; place-items: center; }
+.lightbox__close svg { width: 22px; height: 22px; fill: currentColor; }
+@keyframes fadeIn { from { opacity: 0; } }
+@keyframes lbIn { from { opacity: 0; transform: scale(.94) translateY(12px); } }
+body.has-lightbox { overflow: hidden; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
