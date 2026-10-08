@@ -66,12 +66,19 @@
   requestAnimationFrame(function () { requestAnimationFrame(function () { hero.classList.add('is-in'); }); });
 
   /* ---------- Image reveals ---------- */
+  /* observe the unclipped parent: a fully clipped target may never report as intersecting */
   var reveals = document.querySelectorAll('.reveal-img');
   if ('IntersectionObserver' in window && !reduceMotion) {
     var rObs = new IntersectionObserver(function (entries) {
-      entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('is-visible'); rObs.unobserve(en.target); } });
-    }, { threshold: 0.25 });
-    reveals.forEach(function (el) { rObs.observe(el); });
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        en.target.querySelectorAll('.reveal-img').forEach(function (el) { el.classList.add('is-visible'); });
+        rObs.unobserve(en.target);
+      });
+    }, { threshold: 0.15 });
+    var parents = [];
+    reveals.forEach(function (el) { if (parents.indexOf(el.parentElement) < 0) parents.push(el.parentElement); });
+    parents.forEach(function (p) { rObs.observe(p); });
   } else {
     reveals.forEach(function (el) { el.classList.add('is-visible'); });
   }
