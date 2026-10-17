@@ -79,6 +79,7 @@
         <li><a href="#doctors">Doctors</a></li>
         <li><a href="#fees">Fees</a></li>
         <li><a href="#faqs">FAQs</a></li>
+        <li><a href="#contact">Contact Us</a></li>
       </ul>
       <div class="hdr__nav-cta">
         <a class="btn btn--green" href="https://www.hotdoc.com.au/medical-centres/victoria-point-QLD-4165/sunstate-family-practice/doctors" target="_blank" rel="noopener">Book appointment</a>
@@ -130,7 +131,7 @@
       </ul>
       <div class="hero__actions">
         <a class="btn btn--green btn--lg" href="https://www.hotdoc.com.au/medical-centres/victoria-point-QLD-4165/sunstate-family-practice/doctors" target="_blank" rel="noopener">Book your skin check</a>
-        <a class="hero__link" href="#technology">See how mapping works</a>
+        <a class="hero__link" href="#contact">Contact Us</a>
       </div>
     </div>
   </div>
@@ -621,6 +622,75 @@
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section class="contact" id="contact" aria-labelledby="contact-title">
+  <div class="wrap contact__grid">
+    <div class="contact__intro">
+      <h2 id="contact-title" class="h2 h2--light">Have a question? Send us a message</h2>
+      <p>Not ready to book, or just want to ask something first? Our reception team will get back to you during opening hours.</p>
+      <ul class="contact__details">
+        <li><span>Phone</span><a href="tel:+61732077744">(07) 3207 7744</a></li>
+        <li><span>Email</span><a href="mailto:reception@sunstatefamilypractice.com.au">reception@sunstatefamilypractice.com.au</a></li>
+        <li><span>Visit</span>127 Link Road, Victoria Point QLD 4165</li>
+      </ul>
+      <p class="contact__urgent">This form is for general enquiries only. Please don’t include detailed medical information. For medical advice, book an appointment. In an emergency, call 000.</p>
+    </div>
+
+    <form class="contact__form" data-contact-form data-endpoint="" novalidate>
+      <div class="field-row">
+        <div class="field">
+          <label for="cf-first">First name</label>
+          <input id="cf-first" name="first_name" type="text" autocomplete="given-name" required>
+          <p class="field__error" id="cf-first-err">Enter your first name.</p>
+        </div>
+        <div class="field">
+          <label for="cf-last">Last name</label>
+          <input id="cf-last" name="last_name" type="text" autocomplete="family-name" required>
+          <p class="field__error" id="cf-last-err">Enter your last name.</p>
+        </div>
+      </div>
+      <div class="field-row">
+        <div class="field">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" name="email" type="email" autocomplete="email" required>
+          <p class="field__error" id="cf-email-err">Enter an email address like name@example.com.</p>
+        </div>
+        <div class="field">
+          <label for="cf-phone">Phone</label>
+          <input id="cf-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" required>
+          <p class="field__error" id="cf-phone-err">Enter a phone number we can call you on.</p>
+        </div>
+      </div>
+      <div class="field">
+        <label for="cf-message">Message</label>
+        <textarea id="cf-message" name="message" rows="5" required></textarea>
+        <p class="field__error" id="cf-message-err">Enter your question or message.</p>
+      </div>
+      <div class="field">
+        <label for="cf-source">How did you hear about us?</label>
+        <select id="cf-source" name="heard_about_us" required>
+          <option value="" selected disabled>Choose one</option>
+              <option>Search Engines (Google, Bing, Yahoo)</option>
+              <option>Social media (Facebook, Instagram, TikTok)</option>
+              <option>From a friend or family member</option>
+              <option>From another doctor</option>
+              <option>Newsletter</option>
+              <option>Text message</option>
+              <option>Influencer</option>
+              <option>Radio (incl. podcasts)</option>
+              <option>AI chats (ChatGPT, Gemini, Perplexity)</option>
+              <option>Other</option>
+        </select>
+        <p class="field__error" id="cf-source-err">Choose how you heard about us.</p>
+      </div>
+      <input class="hp" type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <p class="contact__privacy">By sending this form you agree to us using your details to respond to your enquiry, in line with our <a href="https://sunstatefamilypractice.com.au/wp-content/uploads/2025/08/Privacy-Policy-incl-AI.pdf" target="_blank" rel="noopener">privacy policy</a>.</p>
+      <button class="btn btn--green btn--lg contact__submit" type="submit">Send message</button>
+      <div class="contact__status" role="status" aria-live="polite" data-form-status></div>
+    </form>
   </div>
 </section>
 
