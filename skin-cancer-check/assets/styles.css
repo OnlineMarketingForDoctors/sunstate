@@ -558,6 +558,7 @@ button { font: inherit; cursor: pointer; }
 .fee-table .ph { color: var(--stone); }
 .fees__note { margin: 16px 0 0; font-size: .9375rem; color: var(--stone); }
 .fees__note a { white-space: nowrap; }
+.fees__effective { margin: 12px 0 0; font-size: .875rem; font-weight: 700; color: var(--stone); }
 .fees__fund { margin: 16px 0 0; font-style: italic; color: var(--plum); font-weight: 500; }
 .fees__notes { margin: 14px 0 0; padding-left: 18px; font-size: .875rem; color: var(--stone); display: grid; gap: 6px; }
 @media (max-width: 900px) {
