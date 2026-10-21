@@ -772,6 +772,11 @@ body.has-lightbox { overflow: hidden; }
   .hdr__book { padding: .7em 1.2em; font-size: .9375rem; }
 }
 
+
+/* LeadConnector form embed: white card that hugs the iframe with no padding below */
+.contact__embed { background: #fff; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--sh-3); line-height: 0; }
+.contact__embed iframe { display: block; width: 100%; min-height: 0; }
+
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

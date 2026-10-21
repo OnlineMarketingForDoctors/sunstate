@@ -307,61 +307,19 @@
     });
   });
 
-  /* ---------- Contact form ----------
-     Posts JSON to data-endpoint when one is configured. Until a delivery
-     service is connected, it offers email or phone instead so nothing is lost. */
-  var form = document.querySelector('[data-contact-form]');
-  if (form) {
-    var status = form.querySelector('[data-form-status]');
-    var submitBtn = form.querySelector('button[type="submit"]');
-    var fields = Array.prototype.slice.call(form.querySelectorAll('input[required], textarea[required], select[required]'));
-    var emailOk = function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); };
-    var check = function (el) {
-      var v = el.value.trim();
-      var ok = el.type === 'email' ? emailOk(v) : el.type === 'tel' ? v.replace(/\D/g, '').length >= 8 : v !== '';
-      var wrap = el.closest('.field');
-      wrap.classList.toggle('is-invalid', !ok);
-      el.setAttribute('aria-invalid', String(!ok));
-      if (!ok) el.setAttribute('aria-describedby', el.id + '-err'); else el.removeAttribute('aria-describedby');
-      return ok;
-    };
-    fields.forEach(function (el) {
-      el.addEventListener('blur', function () { if (el.value.trim() !== '') check(el); });
-      el.addEventListener('input', function () { if (el.closest('.field').classList.contains('is-invalid')) check(el); });
-      el.addEventListener('change', function () { if (el.tagName === 'SELECT') check(el); });
-    });
-    var setStatus = function (cls, html) { status.className = 'contact__status ' + cls; status.innerHTML = html; };
-    var escapeHtml = function (t) { return t.replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); };
-    form.addEventListener('submit', function (e) {
-      e.preventDefault();
-      var firstBad = null;
-      fields.forEach(function (el) { if (!check(el) && !firstBad) firstBad = el; });
-      if (firstBad) { firstBad.focus(); return; }
-      if (form.querySelector('.hp').value) return;
-      var data = {};
-      new FormData(form).forEach(function (v, k) { if (k !== '_honey') data[k] = String(v).trim(); });
-      var endpoint = form.dataset.endpoint;
-      if (!endpoint) {
-        var body = 'Name: ' + data.first_name + ' ' + data.last_name + '\nEmail: ' + data.email + '\nPhone: ' + data.phone +
-          '\nHow did you hear about us: ' + data.heard_about_us + '\n\n' + data.message;
-        var mailto = 'mailto:reception@sunstatefamilypractice.com.au?subject=' + encodeURIComponent('Website enquiry from ' + data.first_name + ' ' + data.last_name) +
-          '&body=' + encodeURIComponent(body);
-        setStatus('is-pending', 'Online enquiries aren’t connected yet. <a href="' + escapeHtml(mailto) + '">Send your message by email</a> (we’ve filled it in for you) or call us on <a href="tel:+61732077744">(07) 3207 7744</a>.');
-        return;
-      }
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending…';
-      fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
-        .then(function (r) { if (!r.ok) throw new Error(r.status); })
-        .then(function () {
-          /* hand the first name to the thank-you page without putting it in the URL */
-          try { sessionStorage.setItem('sfp_first_name', data.first_name); } catch (err) {}
-          window.location.href = '/thank-you/';
-        })
-        .catch(function () {
-          setStatus('is-error', 'Your message didn’t send. Check your connection and try again, or call us on <a href="tel:+61732077744">(07) 3207 7744</a>.');
-        })
-        .then(function () { submitBtn.disabled = false; submitBtn.textContent = 'Send message'; });
+  /* ---------- Contact form embed (LeadConnector) ----------
+     form_embed.js resizes the iframe to its content. As a fallback, also apply
+     any height the form posts, so the card never shows a gap or a scrollbar. */
+  var embed = document.getElementById('inline-QX8FTP0S2dR2yb7Zq6Bx');
+  if (embed) {
+    window.addEventListener('message', function (e) {
+      if (!/(leadconnectorhq\.com|msgsndr\.com)$/.test(String(e.origin).replace(/^https?:\/\//, '').replace(/:\d+$/, ''))) return;
+      var d = e.data, h = null;
+      if (typeof d === 'string') { try { d = JSON.parse(d); } catch (err) { return; } }
+      if (Array.isArray(d) && /height/i.test(String(d[0])) && d[1]) h = d[1].height || d[1];
+      else if (d && typeof d === 'object' && d.height) h = d.height;
+      h = parseInt(h, 10);
+      if (h > 100) embed.style.height = h + 'px';
     });
   }
 
