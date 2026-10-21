@@ -774,7 +774,7 @@ body.has-lightbox { overflow: hidden; }
 
 
 /* LeadConnector form embed: white card that hugs the iframe with no padding below */
-.contact__embed { background: #fff; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--sh-3); line-height: 0; }
+.contact__embed { background: #fff; border-radius: var(--r-xl); overflow: hidden; box-shadow: var(--sh-3); line-height: 0; padding: 40px; }
 .contact__embed iframe { display: block; width: 100%; min-height: 0; }
 
 /* ---------- Reduced motion ---------- */
