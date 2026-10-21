@@ -354,9 +354,9 @@
       fetch(endpoint, { method: 'POST', headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, body: JSON.stringify(data) })
         .then(function (r) { if (!r.ok) throw new Error(r.status); })
         .then(function () {
-          form.reset();
-          fields.forEach(function (el) { el.closest('.field').classList.remove('is-invalid'); });
-          setStatus('is-success', 'Message sent. Thanks, ' + escapeHtml(data.first_name) + '. Our reception team will get back to you during opening hours.');
+          /* hand the first name to the thank-you page without putting it in the URL */
+          try { sessionStorage.setItem('sfp_first_name', data.first_name); } catch (err) {}
+          window.location.href = '/thank-you/';
         })
         .catch(function () {
           setStatus('is-error', 'Your message didn’t send. Check your connection and try again, or call us on <a href="tel:+61732077744">(07) 3207 7744</a>.');
