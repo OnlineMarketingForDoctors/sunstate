@@ -20,3 +20,8 @@ Also: do not add a `sitemap.xml`, and do not submit the site to Search Console.
 - Remove the `X-Robots-Tag` header from `vercel.json` and `_headers`
 - Remove the robots meta tag from every page (grep for `name="robots"`)
 - Update `robots.txt` (add `Sitemap:` line) and add a sitemap
+
+## Google Tag Manager (every page)
+Every HTML page must include the GTM container `GTM-KR46SKDH`: the script snippet
+immediately after `<head>`, and the `<noscript>` iframe immediately after `<body>`.
+Copy both snippets from `skin-cancer-check/index.html`.
