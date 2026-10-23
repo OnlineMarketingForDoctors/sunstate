@@ -166,6 +166,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       sessionStorage.removeItem('sfp_first_name');
     }
   } catch (e) {}
+  /* HotDoc booking click tracking (same event as the landing page) */
+  document.addEventListener('click', function (e) {
+      var a = e.target.closest && e.target.closest('a[href*="hotdoc.com.au"]');
+      if (!a) return;
+      var where = a.closest('.hdr__nav') ? 'menu' : a.closest('header') ? 'header' : (function () {
+        var s = a.closest('section, footer');
+        return s ? (s.id || s.className.split(' ')[0]) : 'page';
+      })();
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: 'hotdoc_booking_click',
+        cta_location: where,
+        cta_text: a.textContent.replace(/\s+/g, ' ').trim(),
+        link_url: a.href,
+        page_path: location.pathname
+      });
+    });
   var yr = document.querySelector('[data-year]'); if (yr) yr.textContent = new Date().getFullYear();
 })();
 </script>

@@ -323,6 +323,27 @@
     });
   }
 
+  /* ---------- HotDoc booking click tracking ----------
+     Pushes a GTM dataLayer event for every click on a HotDoc booking link,
+     with where on the page it was clicked. Bookings finish on hotdoc.com.au,
+     so this is the last step the site itself can see. */
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="hotdoc.com.au"]');
+    if (!a) return;
+    var where = a.closest('.hdr__nav') ? 'menu' : a.closest('header') ? 'header' : (function () {
+      var s = a.closest('section, footer');
+      return s ? (s.id || s.className.split(' ')[0]) : 'page';
+    })();
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: 'hotdoc_booking_click',
+      cta_location: where,
+      cta_text: a.textContent.replace(/\s+/g, ' ').trim(),
+      link_url: a.href,
+      page_path: location.pathname
+    });
+  });
+
   /* ---------- Year ---------- */
   var yr = document.querySelector('[data-year]');
   if (yr) yr.textContent = new Date().getFullYear();
