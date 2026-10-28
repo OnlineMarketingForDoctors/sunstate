@@ -10,5 +10,12 @@
       ]
     }
   ],
-  "trailingSlash": true
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "/skin-cancer-check/",
+      "permanent": false
+    }
+  ]
 }
